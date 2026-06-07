@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { ORDER_URL } from '@/lib/site';
 
-// Floating pill nav. Background uses /public/nav-bg.png (yellow swirl); logo uses
-// /public/wow-logo.png. Both fall back gracefully if the file isn't present yet.
 const LINKS = [
   { label: 'Story', href: '/story' },
   { label: 'Menu', href: '/menu' },
@@ -15,7 +14,6 @@ const LINKS = [
   { label: 'Horeca', href: 'https://wowhoreca.com/', external: true },
 ];
 
-const ORDER_URL = 'https://woweats.co.in';
 const NAV_BG = { backgroundColor: '#FFC400', backgroundImage: 'url(/nav-bg.png)', backgroundSize: 'cover', backgroundPosition: 'center' };
 
 function NavLink({ l, onClick }) {

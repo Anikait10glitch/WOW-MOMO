@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ORDER_URL } from '@/lib/site';
 
-// Persistent "Order" button that fades in after the hero — a known QSR
-// conversion lever. Hidden until scrolled, respects small screens.
 export default function StickyOrder() {
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -15,7 +14,7 @@ export default function StickyOrder() {
 
   return (
     <a
-      href="https://woweats.co.in"
+      href={ORDER_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Order online"
