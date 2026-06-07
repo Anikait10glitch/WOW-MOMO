@@ -2,6 +2,22 @@ import Link from 'next/link';
 import BrandMenu from '@/components/BrandMenu';
 import FmcgCarousel from '@/components/FmcgCarousel';
 import IndiaMap from '@/components/IndiaMap';
+import { SITE_URL, SITE_DESC } from '@/lib/site';
+
+export const metadata = {
+  alternates: { canonical: SITE_URL },
+  openGraph: {
+    title: "WOW! Momo — India's Favourite Desi Chinese",
+    description: SITE_DESC,
+    url: SITE_URL,
+    images: [{ url: '/og.jpg', width: 1200, height: 630, alt: 'WOW! Momo' }],
+  },
+  twitter: {
+    title: "WOW! Momo — India's Favourite Desi Chinese",
+    description: SITE_DESC,
+    images: ['/og.jpg'],
+  },
+};
 
 const FAQ = [
   { q: 'Where can I order Wow!?', a: 'Order on our app, or via Swiggy and Zomato. Use “Order Online” up top to start.' },
