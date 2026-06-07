@@ -64,7 +64,6 @@ export default function BrandMenu() {
           <h2 className="mt-2 font-display text-5xl sm:text-7xl font-semibold uppercase leading-none tracking-tighter text-brand-charcoal">Four ways to Wow!</h2>
         </div>
 
-        {/* Brand circles — pick one, the menu below follows */}
         <div className="mb-16 flex flex-wrap items-start justify-center gap-8 sm:gap-12">
           {BRANDS.map((b, i) => (
             <button
@@ -86,7 +85,6 @@ export default function BrandMenu() {
           ))}
         </div>
 
-        {/* Menu — full 3-column grid (9 dishes). Momo rows: steam / fried / pan-fried. */}
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-12">
           {brand.menu.map((item) => (
             <div data-card key={item.name} className="group">

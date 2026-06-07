@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Scroll-reveal for any element marked [data-reveal] within the ref. Used across
-// the inner pages. Respects prefers-reduced-motion.
 export function useReveal(ref) {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

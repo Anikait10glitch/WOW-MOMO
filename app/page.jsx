@@ -50,13 +50,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Brands + menu (one always selected; auto-rotates every 30s) */}
       <BrandMenu />
-
-      {/* Wow! @Home packaged range */}
       <FmcgCarousel />
-
-      {/* Find Us — interactive India map */}
       <IndiaMap />
 
       {/* FAQ */}
