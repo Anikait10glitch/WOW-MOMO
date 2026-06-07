@@ -34,12 +34,12 @@ const LEADERS = [
 ];
 
 const COLLAGE = [
-  '/menu/momo/chatpata-paneer-panfried.webp',
-  '/menu/china/chilli-chicken-dry.webp',
-  '/menu/chicken/korean-bbq-burger.webp',
-  '/menu/kulfi/popsicle-mango.webp',
-  '/menu/momo/veg-himalayan-steam.webp',
-  '/menu/china/chicken-lollypop.webp',
+  { src: '/menu/momo/chatpata-paneer-panfried.webp', alt: 'Chatpata Paneer Pan-Fried Momo' },
+  { src: '/menu/china/chilli-chicken-dry.webp', alt: 'Chilli Chicken Dry' },
+  { src: '/menu/chicken/korean-bbq-burger.webp', alt: 'Korean Barbeque Burger' },
+  { src: '/menu/kulfi/popsicle-mango.webp', alt: 'Mango Popsicle' },
+  { src: '/menu/momo/veg-himalayan-steam.webp', alt: 'Veg Himalayan Steam Momo' },
+  { src: '/menu/china/chicken-lollypop.webp', alt: 'Chicken Lollypop' },
 ];
 
 // Image that falls back to another src if the first is missing.
@@ -204,10 +204,10 @@ export default function StoryContent() {
             <h2 className="font-display text-4xl sm:text-6xl font-semibold uppercase tracking-tighter text-brand-charcoal">Made to make you go Wow!</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {COLLAGE.map((src, i) => (
-              <div data-reveal key={src} className={`overflow-hidden rounded-2xl ${i % 5 === 0 ? 'row-span-2' : ''}`}>
+            {COLLAGE.map((item, i) => (
+              <div data-reveal key={item.src} className={`overflow-hidden rounded-2xl ${i % 5 === 0 ? 'row-span-2' : ''}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt="Wow! dish" className="h-full w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                <img src={item.src} alt={item.alt} className="h-full w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
               </div>
             ))}
           </div>
