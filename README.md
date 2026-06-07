@@ -1,49 +1,97 @@
-# WOW! Momo — Unified Website
+# WOW! Momo — Website
 
-One Next.js app that merges the six approved template pages into a single, branded site.
+A premium marketing site for Wow! Momo, built by IMX Creative Studio. One Next.js app
+covering Home, Menu, Our Story, Find Us, Catering and Contact — unified from six
+separate design templates into a single design system.
+
+> Status: feature-complete front end, production-hardened (perf, SEO, a11y). A short
+> list of content/credentials is still pending (see "Pending / placeholders" below).
 
 ## Stack
-- **Next.js 14** (App Router) + **React 18**
-- **Tailwind CSS 3** with locked Wow design tokens (`tailwind.config.js`)
-- Fonts kept from the template: Oswald (display), DM Sans (body), PT Serif (accent)
 
-## Run it
+- **Next.js 14** (App Router) + **React 18**, JavaScript (no TS)
+- **Tailwind CSS 3** with design tokens in `tailwind.config.js`
+- **GSAP** (+ ScrollTrigger) for motion, **Lenis** for smooth scroll
+- Fonts: Oswald (display), DM Sans (body), PT Serif (accent) — via Google Fonts `<link>`
+- Static-first: all routes prerender (`○ Static`); no DB, no server state
+
+## Quick start
+
 ```bash
-cd wow-momo-site
 npm install
 npm run dev      # http://localhost:3000
+npm run build    # production build (all routes static)
+npm start        # serve the production build
 ```
-Build: `npm run build && npm start`
 
-## Structure
+Node 18+ recommended.
+
+## Project structure
+
 ```
 app/
-  layout.jsx        Shared Nav + Footer wrap every page
-  page.jsx          Home (fully rebranded to Wow)
-  menu/             route stub — port from "Menu Page" template
-  story/            route stub — port from "About Us" template
-  locations/        route stub — port from "Our Locations" template
-  catering/         route stub — port from "Catering Page" template
-  contact/          route stub — port from "Contact Us" template
-components/
-  Nav.jsx           Floating pill nav (Order Online → woweats.co.in)
-  Footer.jsx        Wow footer (Explore / Business / Contact)
-  Marquee.jsx       Scrolling strip
-  FmcgCarousel.jsx  Wow! @Home packaged-foods showcase (NEW)
+  layout.jsx            Root layout: <Nav>, <SmoothScroll>, <Footer>, <StickyOrder>,
+                        metadata (OpenGraph/Twitter), JSON-LD, skip link
+  page.jsx              Home (hero, BrandMenu, FmcgCarousel, IndiaMap, FAQ)
+  menu|story|locations|catering|contact/page.jsx
+                        Each is a thin server component (exports metadata) that
+                        renders a matching *Content client component
+  sitemap.js robots.js manifest.js      SEO routes
+  not-found.jsx error.jsx loading.jsx   Branded states
+  icon.png              Favicon source
+  globals.css           Tailwind + focus/skip-link/reduced-motion
+components/             Nav, Footer, SmoothScroll, StickyOrder, BrandMenu,
+                        FmcgCarousel, IndiaMap, Badges, Marquee, *Content, useReveal
+lib/
+  brands.js             4 brands + full menus (name, img, veg, spicy, price, macros)
+  fmcg.js               12 Wow! @Home products
+  indiaMap.js           PRE-GENERATED India map (state paths + projected city pins)
+  site.js               SITE_URL / name / description  ← set SITE_URL before deploy
+public/
+  brands/ menu/ home/ team/   images (webp/jpg). team/ holds founder photos (optional)
+  wow-logo.png og.jpg pwa-icon.png
 ```
 
-## Design tokens (locked)
+## Design tokens (`tailwind.config.js`)
+
 | Token | Hex | Use |
 |-------|-----|-----|
 | `brand-red` | #E2231A | primary accent |
-| `brand-yellow` | #FFC400 | highlights / badges |
+| `brand-orangered` | #E7341A | hero background |
+| `brand-yellow` | #FFC400 | highlights, hover |
 | `brand-charcoal` | #161616 | dark sections |
 | `brand-cream` | #F7F4EB | page background |
 | `brand-ink` | #0F0F0F | body text |
 
-Swap exact hex in `tailwind.config.js` if the brand sends official codes.
+## Data & accuracy
 
-## Status
-- **Done:** unified scaffold, shared Nav/Footer, design system, Home page (incl. Wow! @Home FMCG carousel + brands hub).
-- **Next:** port Menu, Story, Locations, Catering, Contact from their templates; wire forms to a lead destination; drop in real logos, photography and product data from `WowMomo_Build_Tracker.xlsx`.
-- All placeholders are marked `TODO` in the code.
+- **Wow! Momo macros are official** (sourced from Wow's nutrition sheet).
+- **China / Chicken / Kulfi macros and all prices are realistic estimates**, flagged in
+  `lib/brands.js` / `lib/fmcg.js`. Veg/non-veg/spicy flags are accurate.
+- All menu/product images are real, supplied by the client.
+
+## Pending / placeholders (intentional)
+
+- `public/team/` is empty → leadership/founder cards fall back to initials avatars.
+  Add `sagar.jpg`, `binod.jpg`, `miftuar.jpg`, `murali.jpg`, `founders.jpg` to populate.
+- Home hero image is a placeholder block (`app/page.jsx`).
+- Nav background falls back to solid yellow until `public/nav-bg.png` is added.
+- **Forms (Catering, Contact) are not wired to a backend** — they show a confirmation
+  state only. Hook up to an email/CRM endpoint.
+- `lib/site.js` `SITE_URL` is a placeholder — set to the real domain for correct
+  sitemap/OG/canonical URLs.
+
+## Notes for the next dev
+
+- `lib/indiaMap.js` is generated by `genmap.mjs` (root, gitignored) from `@svg-maps/india`
+  using a least-squares lat/long → SVG projection. Those two packages
+  (`@svg-maps/india`, `svgpath`) are **build-time only** — the runtime app imports the
+  generated data, not the packages.
+- Images use plain `<img loading="lazy">` (already compressed webp). Migrating to
+  `next/image` is a straightforward enhancement.
+- Fonts load via `<link>`; can be self-hosted via `next/font` later.
+
+## Deploy
+
+Vercel (recommended): import the repo → it auto-detects Next.js → Deploy. Set
+`SITE_URL` and any form/analytics env vars in the Vercel dashboard.
