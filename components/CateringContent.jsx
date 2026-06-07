@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { useReveal } from '@/components/useReveal';
+import { useReveal } from '@/hooks/useReveal';
 
 const STATS = [
   { n: '5,000+', l: 'Events catered' },

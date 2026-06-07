@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { BRANDS } from '@/lib/brands';
 import DishBadges, { Chili } from '@/components/Badges';
-import { useReveal } from '@/components/useReveal';
+import { useReveal } from '@/hooks/useReveal';
 
 function BrandLogo({ brand }) {
   const [broken, setBroken] = useState(false);

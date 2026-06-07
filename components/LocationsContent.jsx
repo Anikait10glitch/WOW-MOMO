@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import IndiaMap from '@/components/IndiaMap';
-import { useReveal } from '@/components/useReveal';
+import { useReveal } from '@/hooks/useReveal';
 
 const FORMATS = [
   { name: 'Malls', desc: 'Flagship outlets in India\'s biggest malls.', color: '#E2231A',
